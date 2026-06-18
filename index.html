@@ -1,11 +1,78 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="tudo que voce ve " content="width=device-width, initial-scale=1.0">
-    <title>visao de tudo </title>  
+    <title>Miopia</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
 
+        .flashcard-container {
+            width: 350px;
+            height: 220px;
+            perspective: 1000px; 
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .flashcard-container:hover .card {
+            transform: rotateY(180deg);
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .frente {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .verso {
+            background-color: #28a745;
+            color: white;
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
 <body>
-    
+
+    <div class="flashcard-container">
+        <div class="card">
+            <div class="face frente">
+            pessoas que são Míopes não tem nenhum 
+            </div>
+            <div class="face verso">
+                Dificuldade para enxergar objetos que estão LONGE.
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
