@@ -18,67 +18,88 @@
         h1 {
             text-align: center;
             color: #0056b3;
+            margin-bottom: 30px;
         }
 
-        /* Container Flexbox para alinhar os cards lado a lado */
+        /* Container Flexbox */
         .container-flashcards {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
         }
 
-        /* Estilo de cada flashcard */
-        .flashcard {
-            background-color: #ffffff;
-            border: 1px solid #dddddd;
-            border-radius: 10px;
-            padding: 20px;
+        /* --- O SEGREDO DO EFEITO 3D --- */
+
+        /* A "cena" onde o efeito 3D acontece */
+        .flashcard-wrapper {
             width: 300px;
-            min-height: 180px; /* Garante que todos tenham o mesmo tamanho mínimo */
-            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            height: 200px;
+            perspective: 1000px; /* Cria a profundidade do efeito 3D */
+            cursor: pointer;
+        }
+
+        /* O cartão em si que vai girar */
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d; /* Mantém os lados em ambiente 3D */
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Giro suave */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        /* Quando o card recebe a classe 'virado', ele gira 180 graus */
+        .flashcard.virado {
+            transform: rotateY(180deg);
+        }
+
+        /* Estilo base de ambas as faces (frente e verso) */
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Esconde o lado avesso quando virado */
+            border-radius: 12px;
+            padding: 20px;
             box-sizing: border-box;
-            transition: transform 0.2s; /* Efeito suave ao passar o mouse */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #ddd;
         }
 
-        /* Efeito de levitar o card de leve ao passar o mouse */
-        .flashcard:hover {
-            transform: translateY(-5px);
-        }
-
-        .flashcard h2 {
-            margin-top: 0;
+        /* Estilo específico da FRENTE */
+        .face.frente {
+            background-color: #ffffff;
             color: #0056b3;
-            border-bottom: 2px solid #f0f8ff;
-            padding-bottom: 8px;
         }
 
-        /* --- SISTEMA DE REVELAÇÃO DA RESPOSTA --- */
-        
-        /* Esconde o texto da resposta por padrão */
-        .flashcard .resposta {
-            opacity: 0;
-            color: #d9534f; /* Cor vermelha para destacar a resposta */
-            transition: opacity 0.3s ease-in-out; /* Transição suave para aparecer */
+        .face.frente h2 {
+            margin: 0 0 10px 0;
         }
 
-        /* Dica visual para o aluno saber o que fazer */
-        .flashcard::after {
-            content: "💡 Passe o mouse para ver a resposta";
-            display: block;
+        .face.frente .dica {
             font-size: 12px;
             color: #888;
-            margin-top: 20px;
             font-style: italic;
+            margin-top: 15px;
         }
 
-        /* Quando o mouse passa no card, a resposta aparece e a dica some */
-        .flashcard:hover .resposta {
-            opacity: 1;
+        /* Estilo específico do VERSO */
+        .face.verso {
+            background-color: #d9534f; /* Vermelho suave para a resposta */
+            color: #ffffff;
+            transform: rotateY(180deg); /* Já começa invertido para aparecer certo no giro */
         }
 
-        .flashcard:hover::after {
-            display: none; /* Esconde a dica quando a resposta aparece */
+        .face.verso p {
+            margin: 0;
+            line-height: 1.5;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -89,31 +110,58 @@
     <div class="container-flashcards">
 
         <!-- FLASHCARD 1: Miopia -->
-        <div class="flashcard">
-            <h2>Miopia</h2>
-            <!-- Envolvemos a resposta em uma classe para podermos controlá-la no CSS -->
-            <p class="resposta">
-                É a dificuldade de enxergar objetos que estão longe. A imagem é focada antes da retina.
-            </p>
+        <div class="flashcard-wrapper" onclick="virarCard(this)">
+            <div class="flashcard">
+                <!-- Face da Frente (Pergunta) -->
+                <div class="face frente">
+                    <h2>Miopia</h2>
+                    <span class="dica">👆 Clique para ver a resposta</span>
+                </div>
+                <!-- Face do Verso (Resposta) -->
+                <div class="face verso">
+                    <p>É a dificuldade de enxergar objetos que estão longe. A imagem é focada antes da retina.</p>
+                </div>
+            </div>
         </div>
         
         <!-- FLASHCARD 2: Hipermetropia -->
-        <div class="flashcard">
-            <h2>Hipermetropia</h2>
-            <p class="resposta">
-                É a dificuldade de enxergar objetos que estão perto. Ocorre quando a imagem é focada atrás da retina.
-            </p>
+        <div class="flashcard-wrapper" onclick="virarCard(this)">
+            <div class="flashcard">
+                <div class="face frente">
+                    <h2>Hipermetropia</h2>
+                    <span class="dica">👆 Clique para ver a resposta</span>
+                </div>
+                <div class="face verso">
+                    <p>É a dificuldade de enxergar objetos que estão perto. Ocorre quando a imagem é focada atrás da retina.</p>
+                </div>
+            </div>
         </div>
 
         <!-- FLASHCARD 3: Astigmatismo -->
-        <div class="flashcard">
-            <h2>Astigmatismo</h2>
-            <p class="resposta">
-                Causa uma visão distorcida ou embaçada para qualquer distância devido à curvatura irregular da córnea.
-            </p>
+        <div class="flashcard-wrapper" onclick="virarCard(this)">
+            <div class="flashcard">
+                <div class="face frente">
+                    <h2>Astigmatismo</h2>
+                    <span class="dica">👆 Clique para ver a resposta</span>
+                </div>
+                <div class="face verso">
+                    <p>Causa uma visão distorcida ou embaçada para qualquer distância devido à curvatura irregular da córnea.</p>
+                </div>
+            </div>
         </div>
 
     </div> 
 
+    <!-- Script simples que adiciona ou remove a classe que faz girar -->
+    <script>
+        function virarCard(wrapper) {
+            // Procura o elemento com a classe 'flashcard' dentro do wrapper clicado
+            const card = wrapper.querySelector('.flashcard');
+            // Alterna a classe 'virado' (se tiver tira, se não tiver coloca)
+            card.classList.toggle('virado');
+        }
+    </script>
+
 </body>
 </html>
+            
