@@ -1,104 +1,119 @@
-``html
 <!DOCTYPE html>
-<!-- A linha acima define que este documento é um HTML5, a versão mais moderna do HTML. -->
 <html lang="pt-BR">
-<!-- A tag <html> é a raiz de todo o documento. O atributo 'lang="pt-BR"' informa ao navegador que o conteúdo está em português do Brasil. -->
-
 <head>
-    <!-- A tag <head> contém informações sobre a página que não são exibidas diretamente no conteúdo, como o título da aba e a codificação de caracteres. -->
-    <meta charset="UTF-8"> <!-- Garante que o navegador exiba corretamente caracteres especiais, como acentos. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Importante para que a página se adapte a diferentes tamanhos de tela, como celulares. -->
-    <title>Flashcards: Problemas nos Olhos</title> <!-- Este é o texto que aparece na aba do navegador. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards: Problemas nos Olhos</title>
 
-    <!-- A tag <style> é onde colocamos nosso código CSS para estilizar a página. -->
     <style>
-        /* CSS (Cascading Style Sheets) - A parte que cuida da aparência. */
-
-        /* Estilo geral do corpo da página */
+        /* Estilo geral da página */
         body {
-            background-color: #f0f8ff; /* Um fundo azul bem clarinho, cor "AliceBlue". */
-            font-family: Arial, sans-serif; /* Define a família da fonte para algo limpo e legível. */
-            color: #333; /* Cor do texto principal (cinza escuro). */
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
         }
 
-        /* Estilo para o título principal da página */
         h1 {
-            text-align: center; /* Centraliza o texto do título. */
-            color: #0056b3; /* Uma cor azul mais escura para o título. */
+            text-align: center;
+            color: #0056b3;
         }
 
-        /* Estilo do container que vai segurar todos os nossos flashcards */
+        /* Container Flexbox para alinhar os cards lado a lado */
         .container-flashcards {
-            /* Por enquanto não precisa de estilo, mas é uma boa prática organizar os cards dentro de um container. */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        /* AQUI ESTÁ A MÁGICA: O estilo de cada flashcard individual */
+        /* Estilo de cada flashcard */
         .flashcard {
-            background-color: #ffffff; /* Fundo branco para o card. */
-            border: 1px solid #dddddd; /* Uma borda cinza clara para definir o card. */
-            border-radius: 10px; /* Arredonda os cantos do card, deixando-o mais amigável. */
-            padding: 20px; /* Espaçamento INTERNO, entre a borda e o conteúdo do card. */
-            margin: 20px auto; /* Espaçamento EXTERNO. 20px em cima/baixo e 'auto' dos lados para centralizar o card na página. */
-            max-width: 500px; /* Largura máxima para que o card não fique muito largo em telas grandes. */
-            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1); /* Uma sombra suave para dar a impressão de que o card está "flutuando". */
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            min-height: 180px; /* Garante que todos tenham o mesmo tamanho mínimo */
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            transition: transform 0.2s; /* Efeito suave ao passar o mouse */
         }
+
+        /* Efeito de levitar o card de leve ao passar o mouse */
+        .flashcard:hover {
+            transform: translateY(-5px);
+        }
+
         .flashcard h2 {
-            margin-top: 0; 
-            color: #d9534f; 
+            margin-top: 0;
+            color: #0056b3;
+            border-bottom: 2px solid #f0f8ff;
+            padding-bottom: 8px;
         }
-        .flashcard p {
-            line-height: 1.6; /* Aumenta a altura da linha para facilitar a leitura. */
+
+        /* --- SISTEMA DE REVELAÇÃO DA RESPOSTA --- */
+        
+        /* Esconde o texto da resposta por padrão */
+        .flashcard .resposta {
+            opacity: 0;
+            color: #d9534f; /* Cor vermelha para destacar a resposta */
+            transition: opacity 0.3s ease-in-out; /* Transição suave para aparecer */
+        }
+
+        /* Dica visual para o aluno saber o que fazer */
+        .flashcard::after {
+            content: "💡 Passe o mouse para ver a resposta";
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Quando o mouse passa no card, a resposta aparece e a dica some */
+        .flashcard:hover .resposta {
+            opacity: 1;
+        }
+
+        .flashcard:hover::after {
+            display: none; /* Esconde a dica quando a resposta aparece */
         }
     </style>
 </head>
-
 <body>
-    <!-- A tag <body> contém todo o conteúdo visível da página web. -->
 
     <h1>Flashcards de Estudo: Problemas nos Olhos</h1>
 
-    <!-- Este container vai agrupar todos os nossos flashcards. -->
     <div class="container-flashcards">
 
         <!-- FLASHCARD 1: Miopia -->
         <div class="flashcard">
-            <!-- Usamos <div> com a classe "flashcard" para criar cada cartão.
-                 A 'classe' é um nome que damos a um ou mais elementos para aplicar o mesmo estilo CSS a todos eles. -->
             <h2>Miopia</h2>
-            <p>
-                É a dificuldade de enxergar objetos que estão longe. A imagem é focada antes da retina,
-                fazendo com que objetos distantes pareçam embaçados.
+            <!-- Envolvemos a resposta em uma classe para podermos controlá-la no CSS -->
+            <p class="resposta">
+                É a dificuldade de enxergar objetos que estão longe. A imagem é focada antes da retina.
             </p>
         </div>
         
+        <!-- FLASHCARD 2: Hipermetropia -->
         <div class="flashcard">
             <h2>Hipermetropia</h2>
-            <p>
-                É a dificuldade de enxergar objetos que estão perto. Ocorre quando a imagem é focada
-                atrás da retina. Pode causar dores de cabeça e cansaço visual.
+            <p class="resposta">
+                É a dificuldade de enxergar objetos que estão perto. Ocorre quando a imagem é focada atrás da retina.
             </p>
         </div>
 
         <!-- FLASHCARD 3: Astigmatismo -->
         <div class="flashcard">
             <h2>Astigmatismo</h2>
-            <p>
-                Causa uma visão distorcida ou embaçada para qualquer distância. Isso acontece porque
-                a córnea ou o cristalino têm uma curvatura irregular, focando a luz em vários pontos.
+            <p class="resposta">
+                Causa uma visão distorcida ou embaçada para qualquer distância devido à curvatura irregular da córnea.
             </p>
         </div>
 
     </div> 
 
 </body>
-
 </html>
-```
-
-### Explicação da Lógica (Resumo da Aula)
-
-1.  **Estrutura HTML (O Esqueleto):**
-    *   Começamos com a estrutura básica de todo documento HTML (`!DOCTYPE>`, `<html>`, `<head>`, `<body>`).
-    *   No `<body>`, criamos um título principal com a tag `<h1>`.
-    *   O elemento principal do nosso projeto é a `<div>`. A tag `<div>` é como uma "caixa" ou um "contêiner" genérico. Usamos ela para agrupar outros elementos.
-    *   Criamos uma `<div class="">` para cada cartão de estudo. A parte `class="flashcard"` é fundamental. É como dar uma etiqueta a cada caixa para que possamos dizer ao CSS: "Ei, todas as caixas com a etiqueta 'flashcard' devem ter esta aparência!".
