@@ -1,78 +1,366 @@
+
+```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Miopia</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-
-        .flashcard-container {
-            width: 350px;
-            height: 220px;
-            perspective: 1000px; 
-        }
-
-        .card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            cursor: pointer;
-        }
-
-        .flashcard-container:hover .card {
-            transform: rotateY(180deg);
-        }
-
-        .face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            font-size: 18px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .frente {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .verso {
-            background-color: #28a745;
-            color: white;
-            transform: rotateY(180deg);
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards de Estudo - Problemas nos Olhos</title>
 </head>
 <body>
+    <h1>Flashcards sobre Problemas nos Olhos</h1>
+    <p>Passe o mouse sobre o card para ver a resposta!</p>
 
-    <div class="flashcard-container">
-        <div class="card">
-            <div class="face frente">
-            pessoas que são Míopes não tem nenhum 
-            </div>
-            <div class="face verso">
-                Dificuldade para enxergar objetos que estão LONGE.
+    <!-- Nossos flashcards entrarão aqui nas próximas aulas! -->
+
+</body>
+</html>
+```
+
+**Explicação:**
+*   `<!DOCTYPE html>`: Define que o documento é um HTML5, a versão mais moderna.
+*   `<html lang="pt-br">`: É a raiz de tudo. `lang="pt-br"` informa ao navegador que o conteúdo está em português do Brasil.
+*   `<head>`: Contém "meta-informações".
+    *   `<meta charset="UTF-8">`: Garante que o navegador entenda caracteres especiais como "ç" e "ã".
+    *   `<title>`: O texto que aparece na aba do navegador.
+*   `<body>`: Onde toda a mágica visível acontece! Colocamos nossos títulos, parágrafos e, claro, nossos flashcards aqui.
+
+---
+
+### **Aula 2: Criando o Primeiro Flashcard (HTML)**
+
+Agora vamos adicionar a estrutura dos nossos cards. Um flashcard tem dois lados: a frente (com a pergunta ou termo) e o verso (com a resposta ou definição).
+
+**Lógica:**
+Vamos usar a tag `<div>`, que funciona como uma "caixa" para agrupar e organizar elementos. Criaremos uma estrutura aninhada (caixas dentro de caixas) para controlar cada parte do card.
+
+**Código (adicione dentro do `<body>` do arquivo `index.html`):**
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards de Estudo - Problemas nos Olhos</title>
+    <!-- Na próxima aula, vamos linkar nosso arquivo CSS aqui -->
+</head>
+<body>
+    <h1>Flashcards sobre Problemas nos Olhos</h1>
+    <p>Passe o mouse sobre o card para ver a resposta!</p>
+
+    <!-- Container geral para alinhar os cards -->
+    <div class="container-geral">
+
+        <!-- CARD 1: Miopia -->
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="card-frente">
+                    <h2>Miopia</h2>
+                </div>
+                <div class="card-verso">
+                    <p>Dificuldade para enxergar objetos que estão longe. A imagem se forma ANTES da retina.</p>
+                </div>
             </div>
         </div>
+
+        <!-- CARD 2: Hipermetropia -->
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="card-frente">
+                    <h2>Hipermetropia</h2>
+                </div>
+                <div class="card-verso">
+                    <p>Dificuldade para enxergar objetos de perto. A imagem se forma DEPOIS da retina.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CARD 3: Astigmatismo -->
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="card-frente">
+                    <h2>Astigmatismo</h2>
+                </div>
+                <div class="card-verso">
+                    <p>Visão embaçada ou distorcida para perto e para longe, devido a uma imperfeição na córnea.</p>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- Fim do container-geral -->
+
+</body>
+</html>
+```
+
+**Explicação:**
+*   `class="..."`: Classes são como "etiquetas" que damos aos nossos elementos HTML. Usaremos essas etiquetas no CSS para aplicar estilos específicos. Por exemplo, todo elemento com a classe `flashcard` terá o mesmo estilo.
+*   **A Estrutura do Card:**
+    *   `.flashcard-container`: A caixa externa. Ela vai criar o efeito 3D.
+    *   `.flashcard`: A caixa interna, que vai de fato "virar".
+    *   `.card-frente` e `.card-verso`: As duas faces do nosso card.
+
+Por enquanto, você verá apenas o conteúdo um embaixo do outro. A mágica acontece com o CSS!
+
+---
+
+### **Aula 3 e 4: Estilizando e Dando Vida com CSS!**
+
+Chegou a hora de deixar nossos cards bonitos e, o mais importante, interativos! Vamos criar um segundo arquivo chamado `style.css` na mesma pasta do seu `index.html`.
+
+**Lógica:**
+O CSS (Cascading Style Sheets) é usado para dar estilo à nossa página. Vamos:
+1.  Dar uma cor de fundo, centralizar o conteúdo e definir fontes.
+2.  Estilizar os cards para que eles pareçam... bem, como cards! (tamanho, bordas, cores).
+3.  **A Mágica:** Criar a animação de "virar" o card usando transformações 3D do CSS.
+
+#### **Passo 1: Crie o arquivo `style.css`**
+
+Copie e cole o código abaixo em um novo arquivo e salve-o como `style.css`.
+
+```css
+/* style.css */
+
+/* Estilos gerais para a página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Um azul bem clarinho (Alice Blue) */
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #005a9c; /* Um azul mais escuro */
+}
+
+/* Container que segura todos os flashcards */
+.container-geral {
+    display: flex; /* Alinha os cards um ao lado do outro */
+    justify-content: center; /* Centraliza os cards na página */
+    flex-wrap: wrap; /* Se não couber, joga pra linha de baixo */
+    gap: 30px; /* Espaço entre os cards */
+    margin-top: 40px;
+}
+
+/* --- AULA 3: Estilo Básico do Flashcard --- */
+
+/* O container de cada card individual. Ele cria o "espaço 3D" */
+.flashcard-container {
+    width: 300px;
+    height: 200px;
+    perspective: 1000px; /* Define a perspectiva 3D. Essencial para o efeito! */
+}
+
+/* O card em si, que vai girar */
+.flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative; /* Necessário para posicionar a frente e o verso */
+    transition: transform 0.8s; /* Animação suave da virada */
+    transform-style: preserve-3d; /* Garante que os filhos (frente/verso) fiquem em 3D */
+}
+
+/* Estilo comum para a frente e o verso do card */
+.card-frente, .card-verso {
+    position: absolute; /* Coloca um em cima do outro */
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* ESCONDE o lado de trás do elemento quando ele vira */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
+}
+
+/* Estilo específico da FRENTE */
+.card-frente {
+    background-color: #0077cc;
+    color: white;
+}
+
+/* Estilo específico do VERSO */
+.card-verso {
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #0077cc;
+    /* O verso começa já virado, "de costas" para nós */
+    transform: rotateY(180deg);
+}
+
+
+/* --- AULA 4: A MÁGICA - O Efeito de Virar! --- */
+
+/* Quando o mouse passa por cima do container, o card de dentro GIRA */
+.flashcard-container:hover .flashcard {
+    transform: rotateY(180deg); /* Gira o card em 180 graus no eixo Y (vertical) */
+}
+```
+
+#### **Passo 2: Conecte o CSS ao HTML**
+
+Agora, volte ao seu arquivo `index.html` e adicione a linha abaixo dentro da tag `<head>`. Isso diz ao HTML para usar as regras de estilo do nosso arquivo `style.css`.
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards de Estudo - Problemas nos Olhos</title>
+    <!-- LINHA A SER ADICIONADA -->
+    <link rel="stylesheet" href="style.css">
+</head>
+```
+
+### **Código Completo e Funcional**
+
+Juntando tudo, você terá dois arquivos:
+
+#### `index.html`
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards de Estudo - Problemas nos Olhos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Flashcards sobre Problemas nos Olhos</h1>
+    <p>Passe o mouse sobre o card para ver a resposta!</p>
+
+    <div class="container-geral">
+
+        <!-- CARD 1: Miopia -->
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="card-frente">
+                    <h2>Miopia</h2>
+                </div>
+                <div class="card-verso">
+                    <p>Dificuldade para enxergar objetos que estão longe. A imagem se forma ANTES da retina.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2: Hipermetropia -->
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="card-frente">
+                    <h2>Hipermetropia</h2>
+                </div>
+                <div class="card-verso">
+                    <p>Dificuldade para enxergar objetos de perto. A imagem se forma DEPOIS da retina.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CARD 3: Astigmatismo -->
+        <div class="flashcard-container">
+            <div class="flashcard">
+                <div class="card-frente">
+                    <h2>Astigmatismo</h2>
+                </div>
+                <div class="card-verso">
+                    <p>Visão embaçada ou distorcida para perto e para longe, devido a uma imperfeição na córnea.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>
 </html>
+```
+
+#### `style.css`
+```css
+/* Estilos gerais para a página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Um azul bem clarinho (Alice Blue) */
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #005a9c; /* Um azul mais escuro */
+}
+
+/* Container que segura todos os flashcards */
+.container-geral {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* O container de cada card individual. Ele cria o "espaço 3D" */
+.flashcard-container {
+    width: 300px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+/* O card em si, que vai girar */
+.flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Estilo comum para a frente e o verso do card */
+.card-frente, .card-verso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo específico da FRENTE */
+.card-frente {
+    background-color: #0077cc;
+    color: white;
+}
+
+/* Estilo específico do VERSO */
+.card-verso {
+    background-color: #ffffff;
+    color: #333;
+    border: 2px solid #0077cc;
+    transform: rotateY(180deg);
+}
+
+/* A MÁGICA - O Efeito de Virar! */
+.flashcard-container:hover .flashcard {
+    transform: rotateY(180deg);
+}
+```
+
+---
+
+### **Explicação da Lógica (Aula 4)**
+
+A parte mais "difícil" é entender a animação. Vamos quebrar:
+1.  **`perspective: 1000px;`**: No `.flashcard-container`, isso cria uma sensação de profundidade. É como se você estivesse olhando para o card a uma distância de 1000 pixels. Sem isso, a virada pareceria "chata", 2D.
+2.  **`position: absolute;`**: Nos lados `.card-frente` e `.card-verso`, isso faz com que eles ocupem exatamente o mesmo lugar, um em cima do outro.
+3.  **`transform: rotateY(180deg);`**: No `.card-verso`, já deixamos o verso "virado de costas" para nós desde o início.
+4.  **`backface-visibility: hidden;`**: Essa é a regra de ouro! Ela diz: "se um lado do elemento estiver de costas para o espectador, esconda-o". É por isso que, no início, só vemos a frente.
+5.  **`:hover`**: A pseudo-classe `:hover` é o nosso gatilho. A regra `.flashcard-container:hover .flashcard` significa: "Quando o mouse passar por cima do `.flashcard-container`, aplique o seguinte estilo ao `.flashcard` que está dentro dele".
+6.  **A Animação Final**: Ao passar o mouse, o `.flashcard` inteiro gira 180 graus. Como a frente estava em 0° e o verso em 180°, agora a frente vai para 180° (e fica escondida) e o verso vai para 360° (que é o mesmo que 0°), aparecendo para nós! A propriedade `transition` faz essa mudança ocorrer suavemente em 
